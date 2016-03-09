@@ -6,6 +6,7 @@
 'use strict';
 import Thing from '../api/thing/thing.model';
 import User from '../api/user/user.model';
+import Note from '../api/note/note.model'
 
 Thing.find({}).removeAsync()
   .then(() => {
@@ -38,6 +39,30 @@ Thing.find({}).removeAsync()
              'and openshift subgenerators'
     });
   });
+
+
+  Note.find({}).removeAsync()
+    .then(() => {
+      Note.create({
+        date : new Date().JSON().slice(0,10),
+        owner: {
+          type: Schema.ObjectId,
+          ref: 'User'
+        },
+        goodMemories: [
+           'nice food', 'finish some thing'
+        ]
+        {
+          date : new Date().JSON().slice(0,10),
+          owner: {
+            type: Schema.ObjectId,
+            ref: 'User'
+          },
+          goodMemories: [
+             'sunshine', 'I survive'
+          ]
+        }
+    });
 
 User.find({}).removeAsync()
   .then(() => {
